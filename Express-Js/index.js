@@ -23,16 +23,12 @@ app.post('/login', (req, res) => {
   const username = 'Nizam'
   const password = '12345678'
 
-  if(req.body.username != username && req.body.password != password){
-    res.json({status:"Error", message:"Username and Password required!"})
-  }
-
   if(req.body.username != username){
-    res.json({status:"Error", message:"sorry username not found!"})
+    res.json({status:"Error", message:"Sorry, Username Not Found!"})
   }
 
   if(req.body.password != password){
-    res.json({status:"Error", message: "wrong password!"})
+    res.json({status:"Error", message: "Password Incorrect!"})
   }
   
   res.json({

@@ -9,18 +9,25 @@ import { ref } from 'vue';
     const password = ref('')
     const router = useRouter()
 
+
     const onLogin = async () => {
-        const response = await axios.post('http://localhost:3000/login',{
+        if (username.value == ''|| password.value == ''){
+            alert("Tolong lengkapi Username dan Password Anda")
+        } 
+        else {
+          const response = await axios.post('http://localhost:3000/login',{
           username: username.value,
           password: password.value,
         })
-        console.log(response)
-        // if(username.value == ''|| password.value == ''){
-        //     alert("Tolong lengkapi Username dan Password Anda")
-        // }else{
-        //     auth.login(username.value, password.value)
-        //     router.push('/')q
+        if(response.data.status == 'success') {
+            auth.login(username.value, password.value)
+            router.push('/')
         }
+        else{
+          alert(response.data.message)
+        }
+      }
+    }
 </script>
 
 <template>
