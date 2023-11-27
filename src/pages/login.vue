@@ -1,22 +1,26 @@
 <script setup lang="ts">
 import { useAuthStore } from '@/stores/auth';
 import { useRouter } from 'vue-router'
-    import { ref } from 'vue';
+import axios from "axios";
+import { ref } from 'vue';
 
     const auth = useAuthStore()
     const username = ref('')
     const password = ref('')
     const router = useRouter()
 
-    const onLogin = () => {
-        if(username.value == ''|| password.value == ''){
-            alert("Tolong lengkapi Username dan Password Anda")
-        }else{
-            auth.login(username.value, password.value)
-            router.push('/')
+    const onLogin = async () => {
+        const response = await axios.post('http://localhost:3000/login',{
+          username: username.value,
+          password: password.value,
+        })
+        console.log(response)
+        // if(username.value == ''|| password.value == ''){
+        //     alert("Tolong lengkapi Username dan Password Anda")
+        // }else{
+        //     auth.login(username.value, password.value)
+        //     router.push('/')q
         }
-    }
-    
 </script>
 
 <template>
