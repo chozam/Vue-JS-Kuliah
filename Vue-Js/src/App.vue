@@ -7,7 +7,6 @@
 
     const onLogout = () => {
       auth.logout()
-
       router.push('/login')
     }
 
