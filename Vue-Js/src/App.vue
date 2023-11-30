@@ -4,8 +4,28 @@
 
     const auth = useAuthStore()
     const router = useRouter()
+    var username = ''
+    var password = ''
+
+
+    const checkLoginStatus = () => {
+      const loginStatus = sessionStorage.getItem('isLoggedin')
+      if(loginStatus){
+        // isLoggedin = JSON.parse(loginStatus)
+        const save_usr = sessionStorage.getItem('username')
+        const save_pass = sessionStorage.getItem('password')
+        username = JSON.parse(save_usr)
+        password = JSON.parse(save_pass)
+        auth.login(username, password)
+        console.log("tessss")
+      }
+    }
+
+  checkLoginStatus()
+
 
     const onLogout = () => {
+      sessionStorage.clear();
       auth.logout()
       router.push('/login')
     }
